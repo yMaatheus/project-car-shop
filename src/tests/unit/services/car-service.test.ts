@@ -62,17 +62,6 @@ describe('Car Service', () => {
       expect(error.message).to.be.deep.equal(ErrorTypes.ObjectNotFound);
     });
 
-    it('Failure: MongoId invalid', async () => {
-      let error;
-      try {
-        await carService.readOne('id_invalid');
-      } catch (err: any) {
-        error = err
-      }
-
-      expect(error, 'error should be defined').not.to.be.undefined;
-      expect(error.message).to.be.deep.equal(ErrorTypes.InvalidMongoId);
-    });
   });
 
   describe('Update Car', () => {
