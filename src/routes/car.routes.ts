@@ -14,6 +14,7 @@ route.route('/')
   .get((req, res) => carController.getAll(req, res));
 
 route.route('/:id')
-  .get((req, res) => carController.readOne(req, res));
+  .get((req, res) => carController.readOne(req, res))
+  .put((req, res) => carController.update(req, res));
 
 export default route;

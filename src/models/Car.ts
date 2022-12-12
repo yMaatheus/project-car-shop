@@ -8,17 +8,13 @@ const frameMongooseSchema = new Schema<ICar>({
   color: String,
   status: Boolean,
   buyValue: Number,
-});
+  doorsQty: Number,
+  seatsQty: Number,
+}, { versionKey: false });
 
 class Car extends MongoModel<ICar> {
   constructor(model = mongooseCreateModel('Car', frameMongooseSchema)) {
     super(model);
-  }
-
-  public async update(_id: string, _obj: ICar): Promise<ICar | null> {
-    console.log('Not implemented');
-    this._model.find();
-    return null;
   }
 }
 
