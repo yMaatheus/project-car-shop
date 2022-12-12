@@ -45,7 +45,7 @@ describe('Car Service', () => {
       expect(result).to.be.deep.equal(carMockWithId);
     });
 
-    it('Failure', async () => {
+    it('Failure: Id not found', async () => {
       let error;
       try {
         await carService.readOne(carMockWithId._id);
@@ -54,7 +54,19 @@ describe('Car Service', () => {
       }
 
       expect(error, 'error should be defined').not.to.be.undefined;
-      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+      expect(error.message).to.be.deep.equal(ErrorTypes.ObjectNotFound);
+    });
+
+    it('Failure: MongoId invalid', async () => {
+      let error;
+      try {
+        await carService.readOne('id_invalid');
+      } catch (err: any) {
+        error = err
+      }
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.InvalidMongoId);
     });
   });
 });

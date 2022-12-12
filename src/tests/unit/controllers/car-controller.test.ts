@@ -10,7 +10,7 @@ describe('Car Controller', () => {
   const car = new Car()
   const carService = new CarService(car);
   const carController = new CarController(carService);
-  const req = {} as Request; 
+  const req = {} as Request;
   const res = {} as Response;
 
   before(() => {
