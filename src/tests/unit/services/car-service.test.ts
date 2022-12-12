@@ -17,6 +17,9 @@ describe('Car Service', () => {
       .onCall(0).resolves(carMockWithId)
       .onCall(1).resolves(null);
     sinon.stub(car, 'update').resolves(updateCarMock)
+    sinon.stub(car, 'delete')
+      .onCall(0).resolves(carMockWithId)
+      .onCall(1).resolves()
   })
 
   after(() => sinon.restore())
@@ -47,7 +50,7 @@ describe('Car Service', () => {
       expect(result).to.be.deep.equal(carMockWithId);
     });
 
-    it('Failure: Id not found', async () => {
+    it('Failure: Object not found', async () => {
       let error;
       try {
         await carService.readOne(carMockWithId._id);
@@ -90,4 +93,30 @@ describe('Car Service', () => {
       expect(error).to.be.instanceOf(ZodError);
     });
   });
+
+  describe('Delete a Car', () => {
+    it('Success', async () => {
+      let error;
+      try {
+        await carService.delete(carMockWithId._id);
+      } catch(err: any) {
+        error = err
+      }
+
+      expect(error).to.be.undefined;
+    });
+
+    it('Failure: Object not found', async () => {
+      let error;
+      try {
+        await carService.delete(carMockWithId._id);
+      } catch (err: any) {
+        error = err
+      }
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.ObjectNotFound);
+    });
+  });
+
 });
