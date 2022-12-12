@@ -19,6 +19,12 @@ const carMockWithId: ICar & { _id: string } = {
   doorsQty: 2
 };
 
+const updateCarMock = {
+  ...carMockWithId,
+  seatsQty: 3,
+  doorsQty: 3
+}
+
 const carMockList: ICar[] = [carMockWithId]
 
-export { carMock, carMockWithId, carMockList };
+export { carMock, carMockWithId, updateCarMock, carMockList };
