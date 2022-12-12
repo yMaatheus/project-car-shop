@@ -9,7 +9,7 @@ const errorHandler: ErrorRequestHandler = (
   _next,
 ) => {
   if (err instanceof ZodError) {
-    return res.status(400).json({ message: err.issues });
+    return res.status(400).json({ error: err.issues });
   }
   // aqui vamos fazer o cast da mensagem de erro para uma chave do Enum ErrorTypes
   // com o keyof typeof - traduzindo seria algo como 'chaves do tipo de'
@@ -22,12 +22,12 @@ const errorHandler: ErrorRequestHandler = (
   if (mappedError) {
     // dado que o erro está mapeado no nosso catálogo
     // "mappedError" tem valores necessário para responder a requisição
-    const { httpStatus, message } = mappedError;
-    return res.status(httpStatus).json({ message });
+    const { httpStatus, error } = mappedError;
+    return res.status(httpStatus).json({ error });
     // caso seja um erro não mapeado, o mostraremos no log de erros e retornaremos o status 500
   }
   console.error(err);
-  return res.status(500).json({ message: 'internal error' });
+  return res.status(500).json({ error: 'internal error' });
 };
 
 export default errorHandler;
