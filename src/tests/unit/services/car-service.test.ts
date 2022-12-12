@@ -2,9 +2,10 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
+import { ICar } from '../../../interfaces/ICar';
 import Car from '../../../models/Car';
 import CarService from '../../../services/car.service';
-import { carMock, carMockWithId } from '../../mocks/carMock';
+import { carMock, carMockWithId, updateCarMock } from '../../mocks/carMock';
 
 describe('Car Service', () => {
   const car = new Car();
@@ -15,6 +16,7 @@ describe('Car Service', () => {
     sinon.stub(car, 'readOne')
       .onCall(0).resolves(carMockWithId)
       .onCall(1).resolves(null);
+    sinon.stub(car, 'update').resolves(updateCarMock)
   })
 
   after(() => sinon.restore())
@@ -67,6 +69,25 @@ describe('Car Service', () => {
 
       expect(error, 'error should be defined').not.to.be.undefined;
       expect(error.message).to.be.deep.equal(ErrorTypes.InvalidMongoId);
+    });
+  });
+
+  describe('Update Car', () => {
+    it('Success', async () => {
+      const result = await carService.update(carMockWithId._id, updateCarMock);
+
+      expect(result).to.be.deep.equal(updateCarMock);
+    });
+
+    it('Failure: Shape invalid', async () => {
+      let error;
+      try {
+        await carService.update(carMockWithId._id, {} as ICar);
+      } catch (err: any) {
+        error = err
+      }
+
+      expect(error).to.be.instanceOf(ZodError);
     });
   });
 });

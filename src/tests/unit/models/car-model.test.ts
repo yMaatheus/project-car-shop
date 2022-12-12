@@ -2,7 +2,9 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { Model } from 'mongoose';
 import Car from '../../../models/Car';
-import { carMock, carMockList, carMockWithId } from '../../mocks/carMock';
+import { carMock, carMockList, carMockWithId, updateCarMock } from '../../mocks/carMock';
+import { ICar } from '../../../interfaces/ICar';
+import { ErrorTypes } from '../../../errors/catalog';
 
 describe('Car Model', () => {
   const car = new Car();
@@ -11,6 +13,9 @@ describe('Car Model', () => {
 		sinon.stub(Model, 'create').resolves(carMockWithId);
     sinon.stub(Model, 'findOne').resolves(carMockWithId);
     sinon.stub(Model, 'find').resolves(carMockList);
+    sinon.stub(Model, 'findOneAndUpdate')
+      .onCall(0).resolves(updateCarMock)
+      .onCall(1).resolves(null);
     sinon.stub(Model, 'findByIdAndDelete').resolves(carMockWithId);
 	});
 
@@ -42,6 +47,22 @@ describe('Car Model', () => {
 		it('successfully', async () => {
 			const result = await car.read();
 			expect(result).to.be.deep.equal(carMockList);
+		});
+	});
+
+
+  describe('updating a car', () => {
+		it('successfully', async () => {
+			const result = await car.update('632b7f30750a3886638f4980', updateCarMock);
+			expect(result).to.be.deep.equal(updateCarMock);
+		});
+
+		it('_id not found', async () => {
+			try {
+				await car.update('IDERRADO', {} as ICar);
+			} catch (error: any) {
+				expect(error.message).to.be.deep.equal(ErrorTypes.InvalidMongoId);
+			}
 		});
 	});
 
