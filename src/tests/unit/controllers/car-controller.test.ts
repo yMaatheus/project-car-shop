@@ -28,8 +28,8 @@ describe('Car Controller', () => {
     sinon.restore()
   })
 
-  describe('Create', () => {
-    it('Success', async () => {
+  describe('creating', () => {
+    it('successfully created', async () => {
       req.body = carMock;
       await carController.create(req, res);
 
@@ -38,8 +38,8 @@ describe('Car Controller', () => {
     });
   });
 
-  describe('ReadOne', () => {
-    it('Success', async () => {
+  describe('searching by id', () => {
+    it('successfully found', async () => {
       req.params = { id: carMockWithId._id };
       await carController.readOne(req, res);
 
@@ -48,8 +48,8 @@ describe('Car Controller', () => {
     });
   });
 
-  describe('Update', () => {
-    it('Success', async () => {
+  describe('updating', () => {
+    it('successfully update', async () => {
       req.params = { id: carMockWithId._id };
       req.body = { ...updateCarMock }
       await carController.update(req, res);
@@ -59,8 +59,8 @@ describe('Car Controller', () => {
     });
   });
 
-  describe('Delete', () => {
-    it('Success', async () => {
+  describe('deleting', () => {
+    it('successfully delete', async () => {
       req.params = { id: carMockWithId._id };
       await carController.delete(req, res);
 

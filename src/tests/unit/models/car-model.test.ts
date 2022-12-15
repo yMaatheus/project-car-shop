@@ -34,7 +34,7 @@ describe('Car Model', () => {
 			expect(result).to.be.deep.equal(carMockWithId);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await car.readOne('IDERRADO');
 			} catch (error: any) {
@@ -44,7 +44,7 @@ describe('Car Model', () => {
 	});
 
   describe('list all', () => {
-		it('successfully', async () => {
+		it('successfully list', async () => {
 			const result = await car.read();
 			expect(result).to.be.deep.equal(carMockList);
 		});
@@ -52,12 +52,12 @@ describe('Car Model', () => {
 
 
   describe('updating', () => {
-		it('successfully', async () => {
+		it('successfully update', async () => {
 			const result = await car.update('632b7f30750a3886638f4980', updateCarMock);
 			expect(result).to.be.deep.equal(updateCarMock);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await car.update('IDERRADO', {} as ICar);
 			} catch (error: any) {
@@ -67,12 +67,12 @@ describe('Car Model', () => {
 	});
 
   describe('deleting', () => {
-		it('successfully', async () => {
+		it('successfully delete', async () => {
 			const result = await car.delete('632b7f30750a3886638f4980');
 			expect(result).to.be.deep.equal(carMockWithId);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await car.delete('IDERRADO');
 			} catch (error: any) {

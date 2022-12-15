@@ -34,7 +34,7 @@ describe('Motorcycle Model', () => {
 			expect(result).to.be.deep.equal(motorcycleMockWithId);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await motorcycle.readOne('IDERRADO');
 			} catch (error: any) {
@@ -44,7 +44,7 @@ describe('Motorcycle Model', () => {
 	});
 
   describe('list all', () => {
-		it('successfully', async () => {
+		it('successfully list', async () => {
 			const result = await motorcycle.read();
 			expect(result).to.be.deep.equal(motorcycleList);
 		});
@@ -52,12 +52,12 @@ describe('Motorcycle Model', () => {
 
 
   describe('updating', () => {
-		it('successfully', async () => {
+		it('successfully update', async () => {
 			const result = await motorcycle.update('639b28f9fa641e0f99a49407', updateMotorcycleMock);
 			expect(result).to.be.deep.equal(updateMotorcycleMock);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await motorcycle.update('IDERRADO', {} as IMotorcycle);
 			} catch (error: any) {
@@ -67,12 +67,12 @@ describe('Motorcycle Model', () => {
 	});
 
   describe('deleting', () => {
-		it('successfully', async () => {
+		it('successfully delete', async () => {
 			const result = await motorcycle.delete('639b28f9fa641e0f99a49407');
 			expect(result).to.be.deep.equal(motorcycleMockWithId);
 		});
 
-		it('_id not found', async () => {
+		it('failure: _id not found', async () => {
 			try {
 				await motorcycle.delete('IDERRADO');
 			} catch (error: any) {

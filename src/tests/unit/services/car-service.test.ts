@@ -24,14 +24,14 @@ describe('Car Service', () => {
 
   after(() => sinon.restore())
 
-  describe('Create Car', () => {
-    it('Success', async () => {
+  describe('creating', () => {
+    it('successfully created', async () => {
       const created = await carService.create(carMock);
 
       expect(created).to.be.deep.equal(carMockWithId);
     });
 
-    it('Failure', async () => {
+    it('failure: validation error', async () => {
       let error;
       try {
         await carService.create({});
@@ -43,14 +43,14 @@ describe('Car Service', () => {
     });
   });
 
-  describe('ReadOne Car', () => {
-    it('Success', async () => {
+  describe('searching by id', () => {
+    it('successfully found', async () => {
       const result = await carService.readOne(carMockWithId._id);
 
       expect(result).to.be.deep.equal(carMockWithId);
     });
 
-    it('Failure: Object not found', async () => {
+    it('failure: object not found', async () => {
       let error;
       try {
         await carService.readOne(carMockWithId._id);
@@ -64,14 +64,14 @@ describe('Car Service', () => {
 
   });
 
-  describe('Update Car', () => {
-    it('Success', async () => {
+  describe('updating', () => {
+    it('successfully update', async () => {
       const result = await carService.update(carMockWithId._id, updateCarMock);
 
       expect(result).to.be.deep.equal(updateCarMock);
     });
 
-    it('Failure: Shape invalid', async () => {
+    it('failure: object shape invalid', async () => {
       let error;
       try {
         await carService.update(carMockWithId._id, {} as ICar);
@@ -83,8 +83,8 @@ describe('Car Service', () => {
     });
   });
 
-  describe('Delete a Car', () => {
-    it('Success', async () => {
+  describe('deleting', () => {
+    it('successfully delete', async () => {
       let error;
       try {
         await carService.delete(carMockWithId._id);
@@ -95,7 +95,7 @@ describe('Car Service', () => {
       expect(error).to.be.undefined;
     });
 
-    it('Failure: Object not found', async () => {
+    it('failure: object not found', async () => {
       let error;
       try {
         await carService.delete(carMockWithId._id);
