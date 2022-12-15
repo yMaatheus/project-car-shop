@@ -38,8 +38,8 @@ class MotorcycleService implements IService<IMotorcycle> {
   }
 
   public async delete(id: string): Promise<void> {
-    console.log('Not implemented Motorcycle delete');
-    await this._motorcycle.delete(id);
+    const result = await this._motorcycle.delete(id);
+    if (!result) throw Error(ErrorTypes.ObjectNotFound);
   }
 }
 

@@ -15,6 +15,7 @@ route.route('/')
 
 route.route('/:id')
   .get((req, res) => motorcycleController.readOne(req, res))
-  .put((req, res) => motorcycleController.update(req, res));
+  .put((req, res) => motorcycleController.update(req, res))
+  .delete((req, res) => motorcycleController.delete(req, res));
 
 export default route;
