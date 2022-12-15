@@ -29,8 +29,12 @@ class MotorcycleService implements IService<IMotorcycle> {
   }
 
   public async update(id: string, obj: IMotorcycle): Promise<IMotorcycle> {
-    console.log('Not implemented Motorcycle update');
-    return await this._motorcycle.update(id, obj) as IMotorcycle;
+    const parsed = MotorcycleSchema.safeParse(obj);
+    if (!parsed.success) throw parsed.error;
+
+    const result = await this._motorcycle.update(id, obj);
+    if (!result) throw Error(ErrorTypes.ObjectNotFound);
+    return result;
   }
 
   public async delete(id: string): Promise<void> {
