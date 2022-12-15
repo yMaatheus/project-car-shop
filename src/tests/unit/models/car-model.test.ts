@@ -21,14 +21,14 @@ describe('Car Model', () => {
 
 	after(() => sinon.restore());
 
-  describe('creating car', () => {
+  describe('creating', () => {
 		it('successfully created', async () => {
 			const newCar = await car.create(carMock);
 			expect(newCar).to.be.deep.equal(carMockWithId);
 		});
 	});
 
-  describe('searching car', () => {
+  describe('searching', () => {
 		it('successfully found', async () => {
 			const result = await car.readOne('632b7f30750a3886638f4980');
 			expect(result).to.be.deep.equal(carMockWithId);
@@ -43,7 +43,7 @@ describe('Car Model', () => {
 		});
 	});
 
-  describe('list all cars', () => {
+  describe('list all', () => {
 		it('successfully', async () => {
 			const result = await car.read();
 			expect(result).to.be.deep.equal(carMockList);
@@ -51,7 +51,7 @@ describe('Car Model', () => {
 	});
 
 
-  describe('updating a car', () => {
+  describe('updating', () => {
 		it('successfully', async () => {
 			const result = await car.update('632b7f30750a3886638f4980', updateCarMock);
 			expect(result).to.be.deep.equal(updateCarMock);
@@ -66,7 +66,7 @@ describe('Car Model', () => {
 		});
 	});
 
-  describe('deleting a car', () => {
+  describe('deleting', () => {
 		it('successfully', async () => {
 			const result = await car.delete('632b7f30750a3886638f4980');
 			expect(result).to.be.deep.equal(carMockWithId);
