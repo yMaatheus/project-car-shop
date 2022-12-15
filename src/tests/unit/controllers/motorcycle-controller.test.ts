@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 import Motorcycle from '../../../models/Motorcycle';
 import MotorcycleService from '../../../services/motorcycle.service';
 import MotorcycleController from '../../../controllers/motorcycle.controller';
-import { motorcycleMock } from '../../mocks/motorcycleMock';
+import { motorcycleMock, motorcycleMockWithId } from '../../mocks/motorcycleMock';
 
 describe('Car Controller', () => {
   const motorcycle = new Motorcycle()
@@ -15,6 +15,7 @@ describe('Car Controller', () => {
 
   before(() => {
     sinon.stub(motorcycleService, 'create').resolves(motorcycleMock);
+    sinon.stub(motorcycleService, 'readOne').resolves(motorcycleMock);
 
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns(res);
@@ -31,6 +32,16 @@ describe('Car Controller', () => {
       await motorcycleController.create(req, res);
 
       expect((res.status as sinon.SinonStub).calledWith(201)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(motorcycleMock)).to.be.true;
+    });
+  });
+
+  describe('searching by id', () => {
+    it('successfully found', async () => {
+      req.params = { id: motorcycleMockWithId._id };
+      await motorcycleController.readOne(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(200)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith(motorcycleMock)).to.be.true;
     });
   });
