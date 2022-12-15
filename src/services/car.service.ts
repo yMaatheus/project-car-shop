@@ -18,8 +18,7 @@ class CarService implements IService<ICar> {
   }
 
   public async read(): Promise<ICar[]> {
-    const carList = await this._car.read();
-    return carList;
+    return this._car.read();
   }
 
   public async readOne(id: string): Promise<ICar> {
@@ -33,8 +32,9 @@ class CarService implements IService<ICar> {
     const parsed = CarZodSchema.safeParse(obj);
     if (!parsed.success) throw parsed.error;
 
-    const car = await this._car.update(id, obj);
-    return car as ICar;
+    const result = await this._car.update(id, obj);
+    if (!result) throw Error(ErrorTypes.ObjectNotFound);
+    return result;
   }
 
   public async delete(id: string) {
