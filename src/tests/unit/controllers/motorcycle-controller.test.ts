@@ -58,4 +58,13 @@ describe('Car Controller', () => {
     });
   });
 
+  describe('deleting', () => {
+    it('successfully delete', async () => {
+      req.params = { id: motorcycleMockWithId._id };
+      await motorcycleController.delete(req, res);
+
+      expect((res.status as sinon.SinonStub).calledWith(204)).to.be.true;
+    });
+  });
+
 });

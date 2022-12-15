@@ -16,10 +16,10 @@ describe('Motorcycle Service', () => {
     sinon.stub(motorcycle, 'readOne')
       .onCall(0).resolves(motorcycleMockWithId)
       .onCall(1).resolves(null);
-      sinon.stub(motorcycle, 'update').resolves(updateMotorcycleMock)
-      sinon.stub(motorcycle, 'delete')
-        .onCall(0).resolves(motorcycleMockWithId)
-        .onCall(1).resolves()
+    sinon.stub(motorcycle, 'update').resolves(updateMotorcycleMock)
+    sinon.stub(motorcycle, 'delete')
+      .onCall(0).resolves(motorcycleMockWithId)
+      .onCall(1).resolves()
   })
 
   after(() => sinon.restore())
@@ -80,6 +80,31 @@ describe('Motorcycle Service', () => {
       }
 
       expect(error).to.be.instanceOf(ZodError);
+    });
+  });
+
+  describe('deleting', () => {
+    it('successfully delete', async () => {
+      let error;
+      try {
+        await motorcycleService.delete(motorcycleMockWithId._id);
+      } catch (err: any) {
+        error = err
+      }
+
+      expect(error).to.be.undefined;
+    });
+
+    it('failure: object not found', async () => {
+      let error;
+      try {
+        await motorcycleService.delete(motorcycleMockWithId._id);
+      } catch (err: any) {
+        error = err
+      }
+
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.ObjectNotFound);
     });
   });
 
