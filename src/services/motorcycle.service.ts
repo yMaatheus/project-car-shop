@@ -17,8 +17,7 @@ class MotorcycleService implements IService<IMotorcycle> {
   }
 
   public async read(): Promise<IMotorcycle[]> {
-    console.log('Not implemented Motorcycle read');
-    return await this._motorcycle.read() as IMotorcycle[];
+    return this._motorcycle.read();
   }
 
   public async readOne(id: string): Promise<IMotorcycle> {
