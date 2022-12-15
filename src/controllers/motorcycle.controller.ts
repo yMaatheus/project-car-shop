@@ -17,4 +17,10 @@ export default class MotorcycleController {
     const result = await this._service.read();
     return res.status(200).json(result);
   }
+
+  public async readOne(req: Request, res: Response<IMotorcycle>) {
+    const { id } = req.params;
+    const result = await this._service.readOne(id);
+    return res.status(200).json(result);
+  }
 }

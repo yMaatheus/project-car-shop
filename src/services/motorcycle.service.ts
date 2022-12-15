@@ -1,6 +1,7 @@
 import { IModel } from '../interfaces/IModel';
 import IService from '../interfaces/IService';
 import { MotorcycleSchema, IMotorcycle } from '../interfaces/IMotorcycle';
+import { ErrorTypes } from '../errors/catalog';
 
 class MotorcycleService implements IService<IMotorcycle> {
   private _motorcycle: IModel<IMotorcycle>;
@@ -21,8 +22,10 @@ class MotorcycleService implements IService<IMotorcycle> {
   }
 
   public async readOne(id: string): Promise<IMotorcycle> {
-    console.log('Not implemented Motorcycle readOne');
-    return await this._motorcycle.readOne(id) as IMotorcycle;
+    const motorcycle = await this._motorcycle.readOne(id);
+    if (!motorcycle) throw Error(ErrorTypes.ObjectNotFound);
+
+    return motorcycle;
   }
 
   public async update(id: string, obj: IMotorcycle): Promise<IMotorcycle> {

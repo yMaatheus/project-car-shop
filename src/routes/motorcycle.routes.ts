@@ -13,4 +13,7 @@ route.route('/')
   .post((req, res) => motorcycleController.create(req, res))
   .get((req, res) => motorcycleController.getAll(req, res));
 
+route.route('/:id')
+  .get((req, res) => motorcycleController.readOne(req, res));
+
 export default route;
