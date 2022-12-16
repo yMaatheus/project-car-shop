@@ -1,0 +1,236 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+      "title": "Project Car Shop",
+      "version": "1.0.0"
+  },
+  "url": "localhost:3001",
+  "tags": [
+      {
+          "name": "Cars"
+      },
+      {
+          "name": "Motorcycles"
+      }
+  ],
+  "paths": {
+      "/cars": {
+          "post": {
+              "tags": [
+                  "Cars"
+              ],
+              "summary": "/cars",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "example": {
+                                  "model": "Uno da Escada",
+                                  "year": 1963,
+                                  "color": "red",
+                                  "buyValue": 3500,
+                                  "seatsQty": 2,
+                                  "doorsQty": 2
+                              }
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          },
+          "get": {
+              "tags": [
+                  "Cars"
+              ],
+              "summary": "/cars",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          }
+      },
+      "/cars/639b9212d4dbf82232d5d717": {
+          "get": {
+              "tags": [
+                  "Cars"
+              ],
+              "summary": "/cars/:id",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          },
+          "put": {
+              "tags": [
+                  "Cars"
+              ],
+              "summary": "/cars/:id",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "example": {
+                                  "model": "Uno da Escada",
+                                  "year": 1963,
+                                  "color": "red",
+                                  "buyValue": 3500,
+                                  "seatsQty": 3,
+                                  "doorsQty": 3
+                              }
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Cars"
+              ],
+              "summary": "/cars/:id",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          }
+      },
+      "/motorcycles": {
+          "post": {
+              "tags": [
+                  "Motorcycles"
+              ],
+              "summary": "/motorcycles",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "example": {
+                                  "model": "Honda CG Titan 125",
+                                  "year": 1963,
+                                  "color": "red",
+                                  "buyValue": 3500,
+                                  "category": "Street",
+                                  "engineCapacity": 125
+                              }
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          },
+          "get": {
+              "tags": [
+                  "Motorcycles"
+              ],
+              "summary": "/motorcycles",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          }
+      },
+      "/motorcycles/639b7a872ed53d4f0aeecfc0": {
+          "get": {
+              "tags": [
+                  "Motorcycles"
+              ],
+              "summary": "/motorcycles/:id",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          }
+      },
+      "/motorcycles/639b8197420f103b4dda6b96": {
+          "put": {
+              "tags": [
+                  "Motorcycles"
+              ],
+              "summary": "/motorcycles/:id",
+              "requestBody": {
+                  "content": {
+                      "application/json": {
+                          "schema": {
+                              "type": "object",
+                              "example": {
+                                  "model": "Honda CG Titan 125",
+                                  "year": 1963,
+                                  "color": "black",
+                                  "buyValue": 3500,
+                                  "category": "Street",
+                                  "engineCapacity": 125
+                              }
+                          }
+                      }
+                  }
+              },
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          },
+          "delete": {
+              "tags": [
+                  "Motorcycles"
+              ],
+              "summary": "/motorcycles/:id",
+              "responses": {
+                  "200": {
+                      "description": "Successful response",
+                      "content": {
+                          "application/json": {}
+                      }
+                  }
+              }
+          }
+      }
+  }
+}
