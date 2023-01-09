@@ -16,14 +16,28 @@ jobs:
       with:
         node-version: 16
     - run: npm ci
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        port: ${{ secrets.PORT }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        script: |
-          pwd
-          ls
+    - name: Deploy to Server
+      uses: easingthemes/ssh-deploy@main
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        ARGS: "-rlgoDzvc -i --delete"
+        SOURCE: "."
+        REMOTE_HOST: ${{ secrets.HOST }}
+        REMOTE_USER: ${{ secrets.USERNAME }}
+        TARGET: "/home/ubuntu"
+        EXCLUDE: "/dist/, /node_modules/"
+    # - name: SSH Remote Commands
+    #   uses: appleboy/ssh-action@v0.1.7
+    #   with:
+    #     host: ${{ secrets.HOST }}
+    #     username: ${{ secrets.USERNAME }}
+    #     key: ${{ secrets.KEY }}
+    #     port: ${{ secrets.PORT }}
+    #     passphrase: ${{ secrets.PASSPHRASE }}
+    #     script_stop: true
+    #     script: |
+    #       mkdir project-car-shop/
+    #       cd project-car-shop/
+    #       git pull
+    #       npm install
+    #       docker-compose up -d
