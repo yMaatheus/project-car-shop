@@ -25,8 +25,5 @@ jobs:
         port: ${{ secrets.PORT }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-          mkdir project-car-shop/
-          cd project-car-shop/
-          git pull
-          npm install
-          docker-compose up -d
+          pwd
+          ls
