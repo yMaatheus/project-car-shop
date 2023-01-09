@@ -24,7 +24,7 @@ jobs:
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.HOST }}
         REMOTE_USER: ${{ secrets.USERNAME }}
-        TARGET: "/home/ubuntu"
+        TARGET: "/home/ubuntu/project-carshop"
         EXCLUDE: "/dist/, /node_modules/"
     # - name: SSH Remote Commands
     #   uses: appleboy/ssh-action@v0.1.7
